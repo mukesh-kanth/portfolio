@@ -20,3 +20,4 @@ charset-normalizer==3.4.1
 click==8.2.1
 colorama==0.4.4
 comm==0.2.2
+gunicorn==21.2.0
