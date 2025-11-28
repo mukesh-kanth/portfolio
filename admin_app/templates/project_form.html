@@ -1,0 +1,90 @@
+{% extends "admin_page.html" %}
+{% load static %}
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+          <h3 class="mb-0">{{ form.instance.pk|yesno:"Edit Project,Add Project" }}</h3>
+        </div>
+        <div class="card-body p-4">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Title -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Project Title</label>
+              {{ form.title }}
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Project Description</label>
+              {{ form.description }}
+            </div>
+
+            <!-- Tools / Languages -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Tools / Languages Used</label>
+              <select id="tools-select" name="tools[]" class="form-control select2" multiple="multiple">
+                {% for tool in tools_list %}
+                  <option value="{{ tool }}" selected>{{ tool }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Link -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Project Link (Optional)</label>
+              {{ form.link }}
+            </div>
+
+            <!-- Image -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Project Image</label>
+              {{ form.image }}
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+              <button type="submit" class="btn btn-success px-4">Save</button>
+              <a href="{% url 'project_list' %}" class="btn btn-secondary px-4">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery (required for Select2) -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Select2 CSS & JS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#tools-select').select2({
+      placeholder: "Type tools and press Enter",
+      tags: true,               // allow custom tools
+      tokenSeparators: [','],   // separate by comma
+      width: '100%'
+    });
+  });
+</script>
+
+<style>
+  .select2-container--default .select2-selection--multiple {
+    min-height: 45px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 5px;
+  }
+</style>
+{% endblock %}

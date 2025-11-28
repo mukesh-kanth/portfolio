@@ -1,0 +1,22 @@
+{% extends "admin_page.html" %}
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <div class="card shadow-sm rounded-4 border-0">
+        <div class="card-header bg-danger text-white text-center py-3 rounded-top-4">
+          <h3 class="mb-0">Delete Skill</h3>
+        </div>
+        <div class="card-body p-4 text-center">
+          <p>Are you sure you want to delete "<strong>{{ skill.name }}</strong>"?</p>
+          <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
+            <a href="{% url 'skill_list' %}" class="btn btn-secondary px-4">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

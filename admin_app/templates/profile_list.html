@@ -1,0 +1,30 @@
+{% extends "admin_page.html" %}
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Profiles</h2>
+  <a href="{% url 'profile_create' %}" class="btn btn-primary mb-3">Add New Profile</a>
+  <div class="row g-3">
+    {% for profile in profiles %}
+    <div class="col-md-4">
+      <div class="card p-2 shadow-sm">
+        {% if profile.profile_pic %}
+        <img src="{{ profile.profile_pic.url }}" class="card-img-top" alt="{{ profile.name }}">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ profile.name }}</h5>
+          <p class="card-text text-muted">{{ profile.bio|truncatechars:100 }}</p>
+          <p class="mb-1"><strong>Email:</strong> {{ profile.contact_email }}</p>
+          <p class="mb-1"><strong>Location:</strong> {{ profile.location }}</p>
+          <div class="d-flex gap-1">
+            <a href="{% url 'profile_update' profile.id %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'profile_delete' profile.id %}" class="btn btn-sm btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No profiles added yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
