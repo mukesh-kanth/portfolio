@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#0E7C86">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>{{ profile.name|title }} | Portfolio</title>
 
   <!-- Bootstrap 5 -->
@@ -50,13 +53,21 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
     body {
       background: var(--light);
       font-family: 'Inter', sans-serif;
       color: var(--dark);
       overflow-x: hidden;
       line-height: 1.6;
-      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
     /* NEW: Preloader Styles */
@@ -109,6 +120,7 @@
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
+      line-height: 1.2;
     }
 
     /* Premium Navigation Bar with Enhanced Hover Effects */
@@ -227,6 +239,16 @@
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2814, 124, 134, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
 
+    /* FIXED: Navbar collapse animation */
+    .navbar-collapse {
+      transition: all 0.4s ease;
+    }
+
+    .navbar-collapse.collapsing {
+      height: auto !important;
+      transition: height 0.35s ease;
+    }
+
     /* Premium Hero Section */
     .hero-section {
       background: linear-gradient(135deg, var(--light) 0%, var(--light-alt) 100%);
@@ -235,6 +257,7 @@
       position: relative;
       overflow: hidden;
       margin-top: 0;
+      width: 100%;
     }
 
     .hero-section::before {
@@ -509,7 +532,8 @@
     .projects-section {
       padding: 80px 0;
       position: relative;
-      background: var(--light-alt); /* Updated background */
+      background: var(--light-alt);
+      width: 100%;
     }
 
     .projects-section::before {
@@ -675,7 +699,8 @@
       padding: 120px 0;
       position: relative;
       overflow: hidden;
-      background: var(--light); /* Updated background */
+      background: var(--light);
+      width: 100%;
     }
 
     .premium-about-section::before {
@@ -878,11 +903,12 @@
 
     /* Premium Skills Section */
     .skills-section {
-      background: var(--light-alt); /* Updated background */
+      background: var(--light-alt);
       padding: 100px 0;
       margin: 80px 0;
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
 
     .skills-section::before {
@@ -1011,7 +1037,8 @@
     .experience-section {
       margin: 100px 0;
       position: relative;
-      background: var(--light); /* Updated background */
+      background: var(--light);
+      width: 100%;
     }
 
     .experience-section::before {
@@ -1131,7 +1158,8 @@
     /* NEW: Contact Form Styles */
     .contact-form-section {
       padding: 100px 0;
-      background: var(--light-alt); /* Updated background */
+      background: var(--light-alt);
+      width: 100%;
     }
 
     .contact-form-container {
@@ -1196,7 +1224,7 @@
       background-position: right center;
     }
 
-    /* Premium Contact Section - Updated */
+    /* Premium Contact Section - UPDATED: Removed underlines from links */
     .contact-section {
       background: var(--gradient);
       color: white;
@@ -1205,6 +1233,7 @@
       margin-top: 120px;
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
 
     .contact-section::before {
@@ -1260,6 +1289,19 @@
       overflow: hidden;
       min-width: 250px;
       text-align: center;
+      text-decoration: none !important; /* Remove underline */
+      display: inline-block; /* Ensure proper display */
+    }
+
+    /* FIXED: Remove underline from all contact button links */
+    .contact-button,
+    .contact-button:hover,
+    .contact-button:focus,
+    .contact-button:active,
+    .contact-button:visited {
+      text-decoration: none !important;
+      outline: none;
+      border: 2px solid rgba(255, 255, 255, 0.4);
     }
 
     .contact-button::before {
@@ -1283,6 +1325,7 @@
       transform: translateY(-5px);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
       color: white;
+      text-decoration: none !important; /* Ensure no underline on hover */
     }
 
     .contact-detail {
@@ -1290,6 +1333,26 @@
       font-size: 1.2rem;
       margin-top: 10px;
       font-weight: 500;
+      text-decoration: none !important; /* Remove underline from detail text */
+    }
+
+    /* FIXED: Remove underline from contact details specifically */
+    .contact-detail,
+    .contact-detail:hover,
+    .contact-detail:focus {
+      text-decoration: none !important;
+      color: inherit;
+    }
+
+    /* FIXED: For email and phone links specifically */
+    a[href^="mailto:"],
+    a[href^="tel:"],
+    a[href*="linkedin"],
+    a[href*="github"],
+    a[href*="instagram"],
+    a[href*="twitter"],
+    a[href*="social_link"] {
+      text-decoration: none !important;
     }
 
     .social-icons {
@@ -1311,6 +1374,7 @@
       font-size: 1.5rem;
       transition: all 0.3s ease;
       border: 2px solid rgba(255, 255, 255, 0.3);
+      text-decoration: none !important; /* Remove underline */
     }
 
     .social-icon:hover {
@@ -1318,6 +1382,7 @@
       color: var(--primary);
       transform: translateY(-5px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-decoration: none !important;
     }
 
     /* Premium Footer */
@@ -1328,6 +1393,7 @@
       text-align: center;
       font-size: 1.1rem;
       position: relative;
+      width: 100%;
     }
 
     footer::before {
@@ -1570,7 +1636,16 @@
       cursor: pointer;
     }
 
-    /* Responsive Design */
+    /* Responsive Design - ENHANCED FOR ALL DEVICES */
+    @media (max-width: 1400px) {
+      .hero-section h1 {
+        font-size: 3.8rem;
+      }
+      .contact-section h3 {
+        font-size: 3.3rem;
+      }
+    }
+
     @media (max-width: 1200px) {
       .hero-section h1 {
         font-size: 3.5rem;
@@ -1594,6 +1669,10 @@
       
       .projects-grid {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      }
+      
+      .contact-button {
+        min-width: 220px;
       }
     }
 
@@ -1660,6 +1739,10 @@
       .contact-form {
         padding: 40px;
       }
+      
+      .contact-button {
+        min-width: 200px;
+      }
     }
 
     @media (max-width: 768px) {
@@ -1703,14 +1786,23 @@
         margin: 80px 0 50px;
       }
       
+      .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
       .contact-button {
         min-width: 100%;
         margin: 12px 0;
+        width: 100%;
+        max-width: 400px;
       }
       
       .nav-link {
         text-align: center;
         margin: 8px 0;
+        padding: 15px 20px !important;
+        font-size: 1rem;
       }
 
       .skills-section,
@@ -1771,11 +1863,6 @@
         justify-content: center;
       }
       
-      .contact-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
       .profile-stats {
         flex-direction: column;
         align-items: center;
@@ -1783,6 +1870,8 @@
       
       .stat-item {
         min-width: 200px;
+        width: 100%;
+        max-width: 300px;
       }
       
       .contact-form {
@@ -1791,6 +1880,7 @@
       
       .about-features {
         grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
       }
       
       /* Mobile chat adjustments */
@@ -1798,6 +1888,7 @@
         width: 90%;
         left: 5%;
         height: 400px;
+        bottom: 100px;
       }
       
       #chatFloatingBtn {
@@ -1806,6 +1897,16 @@
         width: 55px;
         height: 55px;
         font-size: 1.5rem;
+      }
+      
+      .social-icons {
+        gap: 15px;
+      }
+      
+      .social-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
       }
     }
 
@@ -1816,6 +1917,7 @@
       
       .section-title {
         font-size: 2rem;
+        margin: 70px 0 40px;
       }
       
       .contact-section h3 {
@@ -1853,12 +1955,13 @@
         font-size: 1.2rem;
       }
       
-      .contact-buttons {
-        flex-direction: column;
+      .contact-section {
+        padding: 100px 20px;
       }
       
       .social-icons {
         gap: 15px;
+        flex-wrap: wrap;
       }
       
       .social-icon {
@@ -1870,6 +1973,7 @@
       .hero-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 15px;
       }
       
       .hero-buttons .btn {
@@ -1887,20 +1991,45 @@
       
       .about-features {
         grid-template-columns: 1fr;
+        gap: 15px;
       }
       
       .contact-form {
         padding: 25px 20px;
+      }
+      
+      .contact-button {
+        padding: 18px 20px;
+      }
+      
+      .nav-link {
+        font-size: 0.9rem;
+        padding: 12px 15px !important;
+      }
+      
+      .navbar-brand {
+        font-size: 1.3rem;
+      }
+      
+      /* Fix mobile navbar click issue */
+      .navbar-collapse {
+        background: rgba(253, 242, 240, 0.98);
+        border-radius: 0 0 20px 20px;
+        padding: 20px;
+        margin-top: 10px;
+        box-shadow: 0 10px 30px rgba(14, 124, 134, 0.15);
       }
     }
 
     @media (max-width: 400px) {
       .skills-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
       }
       
       .skill-item {
         max-width: 220px;
+        margin: 0 auto;
       }
       
       .projects-grid {
@@ -1917,6 +2046,314 @@
       
       .hero-section p {
         font-size: 1.1rem;
+      }
+      
+      .contact-section h3 {
+        font-size: 2rem;
+      }
+      
+      .contact-section p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .contact-button {
+        padding: 16px;
+        font-size: 1rem;
+      }
+      
+      .hero-image-top img {
+        width: 180px;
+        height: 180px;
+      }
+      
+      .social-icons {
+        gap: 10px;
+      }
+      
+      .social-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+      }
+      
+      #chatFloatingBtn {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        left: 15px;
+        font-size: 1.3rem;
+      }
+      
+      #aiChatWidget {
+        width: 95%;
+        left: 2.5%;
+        height: 380px;
+        bottom: 80px;
+      }
+      
+      .navbar-brand {
+        font-size: 1.2rem;
+      }
+      
+      .nav-link {
+        font-size: 0.85rem;
+        padding: 10px 12px !important;
+      }
+    }
+
+    /* Extra small devices (phones, 320px and down) */
+    @media (max-width: 320px) {
+      .hero-section h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero-section p {
+        font-size: 1rem;
+      }
+      
+      .hero-image-top img {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .btn-hero, .btn-hero-outline {
+        padding: 14px 30px;
+        font-size: 1rem;
+      }
+      
+      .contact-button {
+        min-width: 100%;
+        padding: 14px;
+      }
+      
+      .skill-item {
+        padding: 20px 15px;
+      }
+      
+      .project-card {
+        border-radius: 15px;
+      }
+      
+      .card-body {
+        padding: 20px;
+      }
+      
+      .section-title {
+        font-size: 1.6rem;
+      }
+      
+      .hero-buttons {
+        gap: 10px;
+      }
+    }
+
+    /* Tablet-specific adjustments */
+    @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+      .hero-section {
+        padding: 200px 0 100px;
+      }
+      
+      .hero-section h1 {
+        font-size: 3.2rem;
+      }
+      
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .contact-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      
+      .contact-button {
+        min-width: auto;
+        width: 100%;
+      }
+      
+      .hero-content {
+        min-height: 70vh;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+      .hero-content {
+        min-height: 60vh;
+      }
+      
+      .hero-section {
+        padding: 150px 0 80px;
+      }
+      
+      .hero-section h1 {
+        font-size: 3rem;
+      }
+      
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .skills-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* For touch devices - Enhanced for better touch experience */
+    @media (hover: none) and (pointer: coarse) {
+      .nav-link:hover::before,
+      .btn-hero:hover::before,
+      .contact-button:hover::before {
+        display: none;
+      }
+      
+      .nav-link:active,
+      .btn-hero:active,
+      .btn-card:active,
+      .contact-button:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+      }
+      
+      .skill-item:active,
+      .project-card:active,
+      .about-feature:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+      }
+      
+      /* Increase touch targets for mobile */
+      .nav-link {
+        padding: 15px 20px !important;
+        margin: 5px 0;
+      }
+      
+      .btn-hero, .btn-hero-outline, .btn-card {
+        padding: 18px 35px;
+        min-height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .contact-button {
+        padding: 22px 30px;
+        min-height: 80px;
+      }
+      
+      .social-icon {
+        width: 55px;
+        height: 55px;
+      }
+    }
+
+    /* High DPI screens */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .hero-section h1,
+      .navbar-brand,
+      .section-title {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      .navbar,
+      .back-to-top,
+      #chatFloatingBtn,
+      #aiChatWidget,
+      .hero-buttons,
+      .contact-buttons,
+      .social-icons,
+      .project-overlay {
+        display: none !important;
+      }
+      
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      
+      .hero-section,
+      .contact-section {
+        padding: 50px 0 !important;
+      }
+      
+      a {
+        color: black !important;
+        text-decoration: none !important;
+      }
+    }
+
+    /* NEW: Fix for navbar collapse on mobile */
+    @media (max-width: 992px) {
+      .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(253, 242, 240, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(14, 124, 134, 0.15);
+        border-radius: 0 0 20px 20px;
+        z-index: 1000;
+      }
+      
+      .nav-item {
+        width: 100%;
+      }
+      
+      .nav-link {
+        width: 100%;
+        justify-content: center;
+        margin: 5px 0;
+      }
+    }
+
+    /* NEW: Ensure all sections fit perfectly */
+    section, .hero-section, .projects-section, .premium-about-section, 
+    .skills-section, .experience-section, .contact-form-section, .contact-section {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* NEW: Fix container width on all devices */
+    .container {
+      max-width: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    /* NEW: Improve text readability on small devices */
+    @media (max-width: 768px) {
+      body {
+        font-size: 0.95rem;
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        line-height: 1.3;
+      }
+      
+      p, li {
+        line-height: 1.7;
+      }
+    }
+
+    /* NEW: Fix for very tall mobile screens */
+    @media (max-height: 700px) and (max-width: 768px) {
+      .hero-section {
+        padding: 150px 0 80px;
+        min-height: auto;
+      }
+      
+      .hero-content {
+        min-height: auto;
       }
     }
   </style>
@@ -1937,7 +2374,7 @@
       <a class="navbar-brand" href="#">
         MK
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -1945,7 +2382,7 @@
           <li class="nav-item">
             <a class="nav-link active" href="#home"><i class="fa fa-home me-2"></i>Home</a>
           </li>
-            <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="#about"><i class="fa fa-user me-2"></i>About</a>
           </li>
           <li class="nav-item">
@@ -2331,7 +2768,7 @@
     </div>
   </section>
 
-  <!-- Premium Contact Section - Updated -->
+  <!-- Premium Contact Section - Updated (UNDERLINES FIXED) -->
   <section id="contact-section" class="contact-section">
     <div class="contact-content">
       <h3 data-aos="fade-up">Let's Work Together</h3>
@@ -2339,25 +2776,25 @@
       
       <div class="contact-buttons" data-aos="fade-up" data-aos-delay="200">
         {% if profile.contact_email %}
-          <a href="mailto:{{ profile.contact_email }}" class="contact-button">
+          <a href="mailto:{{ profile.contact_email }}" class="contact-button" style="text-decoration: none !important;">
             <i class="fa fa-envelope me-2"></i>Email
             <span class="contact-detail">{{ profile.contact_email }}</span>
           </a>
         {% endif %}
         {% if profile.phone_number %}
-          <a href="tel:{{ profile.phone_number }}" class="contact-button">
+          <a href="tel:{{ profile.phone_number }}" class="contact-button" style="text-decoration: none !important;">
             <i class="fa fa-phone me-2"></i>Call
             <span class="contact-detail">{{ profile.phone_number }}</span>
           </a>
         {% endif %}
         {% if profile.social_link %}
-          <a href="{{ profile.social_link }}" target="_blank" class="contact-button">
+          <a href="{{ profile.social_link }}" target="_blank" class="contact-button" style="text-decoration: none !important;">
             <i class="fa fa-link me-2"></i>Portfolio
             <span class="contact-detail">View My Work</span>
           </a>
         {% endif %}
         {% if profile.location %}
-          <span class="contact-button">
+          <span class="contact-button" style="text-decoration: none !important;">
             <i class="fa fa-location-dot me-2"></i>Location
             <span class="contact-detail">{{ profile.location }}</span>
           </span>
@@ -2366,20 +2803,20 @@
       
       <!-- NEW: Social Media Icons -->
       <div class="social-icons" data-aos="fade-up" data-aos-delay="300">
-        <a href="https://github.com/mukesh-kanth" target="_blank" class="social-icon">
+        <a href="https://github.com/mukesh-kanth" target="_blank" class="social-icon" style="text-decoration: none !important;">
           <i class="fab fa-github"></i>
         </a>
-        <a href="https://linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=m-mukesh-kanth-983054305" target="_blank" class="social-icon">
+        <a href="https://linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=m-mukesh-kanth-983054305" target="_blank" class="social-icon" style="text-decoration: none !important;">
           <i class="fab fa-linkedin-in"></i>
         </a>
-        <a href="https://www.instagram.com/the_menace_04?igsh=YWFjZGhnZnRuc2F0" target="_blank" class="social-icon">
+        <a href="https://www.instagram.com/the_menace_04?igsh=YWFjZGhnZnRuc2F0" target="_blank" class="social-icon" style="text-decoration: none !important;">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="{{ profile.twitter_link }}" target="_blank" class="social-icon">
+        <a href="{{ profile.twitter_link }}" target="_blank" class="social-icon" style="text-decoration: none !important;">
             <i class="fab fa-twitter"></i>
           </a>
         {% if profile.social_link %}
-          <a href="{{ profile.social_link }}" target="_blank" class="social-icon">
+          <a href="{{ profile.social_link }}" target="_blank" class="social-icon" style="text-decoration: none !important;">
             <i class="fa fa-globe"></i>
           </a>
         {% endif %}
@@ -2447,17 +2884,38 @@
       }
     });
 
-    // Premium smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
+    // FIXED: Navbar collapse on mobile after clicking a link
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      
+      // Close navbar when clicking a link on mobile
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 992) {
+            // Check if navbar is expanded
+            if (navbarCollapse.classList.contains('show')) {
+              // Trigger click on navbar toggler to close it
+              navbarToggler.click();
+            }
+          }
+        });
+      });
+      
+      // Smooth scrolling for navigation links
+      navLinks.forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const target = document.querySelector(targetId);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
       });
     });
 
@@ -2508,7 +2966,7 @@
       });
     });
 
-     // AI Chat Functionality
+    // AI Chat Functionality
     const chatBtn = document.getElementById("chatFloatingBtn");
     const chatWindow = document.getElementById("aiChatWidget");
     const closeChat = document.getElementById("chatCloseBtn");
@@ -2532,7 +2990,7 @@
       if (e.key === "Enter") sendMessage();
     }); 
 
-     function sendMessage() {
+    function sendMessage() {
       const text = chatInput.value.trim();
       if (!text) return;
 
@@ -2554,43 +3012,19 @@
         }
 
         // Simple response logic - in a real app, this would be an API call
-       let response;
+        let response;
         if (text.toLowerCase().includes("hello") || text.toLowerCase().includes("hi")) {
           response = "Hello! I'm the Mukesh's personal AI assistant for this portfolio. How can I help you today?";
         } else if (text.toLowerCase().includes("project")) {
           response = "The projects section showcases my latest work. You can view details about each project there.";
         } else if (text.toLowerCase().includes("skill")) {
-          response = "I have expertise in various technologies including Python, JavaScript,Django and more. Check out the skills section for details.";
+          response = "I have expertise in various technologies including Python, JavaScript, Django and more. Check out the skills section for details.";
         } else if (text.toLowerCase().includes("contact")) {
           response = "You can reach out through the contact form or use the contact details provided in the contact section.";
         } else if (text.toLowerCase().includes("experience") || text.toLowerCase().includes("work")) {
           response = "My professional experience includes working on various web development projects and technologies. You can find detailed information in the experience section.";
-        } else if (text.toLowerCase().includes("education") || text.toLowerCase().includes("qualification")) {
-          response = "I have a strong educational background in computer science. Please check the education section for my academic qualifications and certifications.";
         } else if (text.toLowerCase().includes("about") || text.toLowerCase().includes("who are you")) {
           response = "I'm Mukesh's AI assistant, here to help you navigate this portfolio and learn more about my work, skills, and projects.";
-        } else if (text.toLowerCase().includes("resume") || text.toLowerCase().includes("cv")) {
-          response = "You can download my resume from the resume section. It contains detailed information about my professional background.";
-        } else if (text.toLowerCase().includes("service") || text.toLowerCase().includes("what can you do")) {
-          response = "I offer services in web development, app development, and technical consulting. Check the services section for more details.";
-        } else if (text.toLowerCase().includes("github") || text.toLowerCase().includes("code")) {
-          response = "You can find my GitHub profile link in the contact section or footer. It contains all my projects and code repositories.";
-        } else if (text.toLowerCase().includes("linkedin") || text.toLowerCase().includes("social")) {
-          response = "My LinkedIn profile and other social media links are available in the contact section or footer of the portfolio.";
-        } else if (text.toLowerCase().includes("hire") || text.toLowerCase().includes("job")) {
-          response = "I'm available for freelance projects and full-time opportunities. Please use the contact form to discuss potential collaborations.";
-        } else if (text.toLowerCase().includes("thank")) {
-          response = "You're welcome! Feel free to ask if you need any more information about my work or portfolio.";
-        } else if (text.toLowerCase().includes("how are you") || text.toLowerCase().includes("how do you do")) {
-          response = "I'm doing great! Ready to help you explore this portfolio and learn more about my work.";
-        } else if (text.toLowerCase().includes("what can you help") || text.toLowerCase().includes("help")) {
-          response = "I can help you learn about my projects, skills, experience, and how to get in touch. Just ask me anything!";
-        } else if (text.toLowerCase().includes("technology") || text.toLowerCase().includes("tech stack")) {
-          response = "I work with modern technologies like React, Node.js, Python, MongoDB, and more. The skills section has the complete list.";
-        } else if (text.toLowerCase().includes("freelance") || text.toLowerCase().includes("consult")) {
-          response = "Yes, I'm available for freelance projects and consulting work. Please use the contact form to discuss your requirements.";
-        } else if (text.toLowerCase().includes("availability") || text.toLowerCase().includes("available")) {
-          response = "I'm currently available for new projects and opportunities. Feel free to reach out through the contact section.";
         } else {
           response = "Thanks for your message! For specific inquiries about my work, please use the contact form or check the relevant sections of my portfolio.";
         }
@@ -2629,8 +3063,10 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const img = entry.target;
-            img.src = img.dataset.src;
-            img.classList.remove('lazy');
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
             imageObserver.unobserve(img);
           }
         });
@@ -2642,6 +3078,39 @@
         }
       });
     });
+
+    // Touch-friendly improvements
+    document.addEventListener('touchstart', function() {}, {passive: true});
+    
+    // Prevent zoom on double-tap for buttons
+    document.querySelectorAll('button, .btn, .nav-link, .contact-button').forEach(el => {
+      el.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) {
+          e.preventDefault();
+        }
+      }, {passive: false});
+    });
+
+    // Optimize for mobile performance
+    if ('connection' in navigator) {
+      if (navigator.connection.saveData || navigator.connection.effectiveType.includes('2g')) {
+        // Reduce animations for slow connections
+        document.body.classList.add('reduced-motion');
+        AOS.init({
+          disable: true
+        });
+      }
+    }
+
+    // NEW: Fix for mobile viewport height issues
+    function setViewportHeight() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', setViewportHeight);
   </script>
 </body>
 </html>
