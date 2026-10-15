@@ -2313,6 +2313,10 @@
         width: 100%;
         justify-content: center;
         margin: 5px 0;
+        position: relative;
+    z-index: 9999;
+    pointer-events: auto;
+    cursor: pointer;
       }
     }
 
@@ -2398,7 +2402,7 @@
             <a class="nav-link" href="#contact-form-section"><i class="fa fa-address-book me-2"></i>Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'admin_login' %}"><i class="fa fa-user me-2"></i>Admin</a>
+            <a class="nav-link" href="/admin_login/"><i class="fa fa-user me-2"></i>Admin</a>
           </li>
         </ul>
       </div>
@@ -2904,20 +2908,30 @@
       });
       
       // Smooth scrolling for navigation links
-      navLinks.forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href');
-          const target = document.querySelector(targetId);
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
+      
+navLinks.forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const targetId = this.getAttribute('href');
+
+    // Only handle links to sections on this page
+    if (!targetId || !targetId.startsWith('#')) {
+      return;
+    }
+
+    const target = document.querySelector(targetId);
+
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
       });
+    }
+  });
+});
+
     });
+
 
     // Premium active nav link on scroll
     window.addEventListener('scroll', function() {

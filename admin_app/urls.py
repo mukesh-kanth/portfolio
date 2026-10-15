@@ -36,7 +36,7 @@ urlpatterns = [
     path('experience/', views.experience_list, name='experience_list'),
     path('experience/add/', views.add_experience, name='add_experience'),
     path('experience/edit/<int:exp_id>/', views.edit_experience, name='edit_experience'),
-    path('experience/delete/<int:exp_id>/', views.delete_experience, name='delete_experience'),
+    path('experience/delete/<int:pk>/', views.delete_experience, name='delete_experience'),
     path('admin_logout/', views.admin_logout, name='admin_logout'),
     path('contact-list/', views.contact_list_view, name='contact_list_view'),
 ]

@@ -22,7 +22,7 @@ from .import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.portfolio_view, name='portfolio_view'),
-    path("admin-login/", views.admin_login, name="admin_login"),
+    path("admin_login/", views.admin_login, name="admin_login"),
     path('contact_view', views.contact_view, name='contact_view'),
     # path("ai-chat/", ai_chat, name="ai_chat"),
 ]
